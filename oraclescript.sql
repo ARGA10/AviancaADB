@@ -17,6 +17,7 @@
 --4. Create a DBA user (with the role DBA) and assign it to the tablespace called "avianca?", this user has
 --          unlimited space on the tablespace (The user should have permission to connect) (0.125)
 alter session set "_ORACLE_SCRIPT"=true;
+  
     CREATE USER dba_user_avianca
         IDENTIFIED BY dba_user_avianca
         DEFAULT TABLESPACE avianca
@@ -44,3 +45,35 @@ alter session set "_ORACLE_SCRIPT"=true;
 
 --6. Create 4 users, assign them the tablespace "avianca?"; 2 of them should have the clerk profile and the
 --remaining the development profile, all the users should be allow to connect to the database. (0.125)
+    CREATE USER clerk_user1
+    IDENTIFIED BY user1
+    PROFILE PRF_cleck
+    DEFAULT TABLESPACE avianca;
+    --
+    CREATE USER clerk_user2
+    IDENTIFIED BY user1
+    PROFILE PRF_cleck
+    DEFAULT TABLESPACE avianca;
+    --   
+    CREATE USER development_user1
+    IDENTIFIED BY user1
+    PROFILE PRF_development
+    QUOTA UNLIMITED ON avianca
+    ACCOUNT UNLOCK
+    DEFAULT TABLESPACE avianca;
+    --
+    CREATE USER development_user2
+    IDENTIFIED BY user1
+    PROFILE PRF_development
+    DEFAULT TABLESPACE avianca;
+--ADICIONAR PRIVIEGIO PARA CONECTAR Y CREAR TABLAS.
+    GRANT CREATE SESSION, CREATE TABLE TO development_user1;
+
+--7. Lock one user associate with clerk profile (0.125)
+    ALTER USER clerk_user2
+    IDENTIFIED BY user1
+    DEFAULT TABLESPACE avianca
+    PROFILE PRF_cleck
+    ACCOUNT LOCK;
+    
+    
