@@ -16,6 +16,7 @@
 
 --4. Create a DBA user (with the role DBA) and assign it to the tablespace called "avianca?", this user has
 --          unlimited space on the tablespace (The user should have permission to connect) (0.125)
+---quitar prefijo C##
 alter session set "_ORACLE_SCRIPT"=true;
   
     CREATE USER dba_user_avianca
